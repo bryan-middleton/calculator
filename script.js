@@ -1,3 +1,10 @@
+const display = document.querySelector('.display');
+
+let numbers = [];
+let currentOperator = '';
+let result = 0;
+let lastButton='';
+
 function operate(number1, operator, number2){
     console.log(number1,operator,number2);
     if(operator === "+"){
@@ -31,47 +38,53 @@ function divide(number1, number2){
 }
 
 function writeDisplay(input){
-    //const display = document.querySelector('.display');
-    display.textContent+=input;
+    if(lastButton ==='operator'){
+        display.textContent='';
+    }
+    lastButton = 'number';
+    display.textContent+=input.textContent;
 }
 
 //press number buttons and display
 const input = document.querySelectorAll('.input');
 console.log(input);
 input.forEach((button)=>{
-    button.addEventListener('click',()=>{
-        if(lastButton ==='operator'){
-        display.textContent='';
-        }
-        writeDisplay(button.textContent);
-        lastButton = 'number';
-    });
+    button.addEventListener('click', ()=>{writeDisplay(button)});
 });
 
-const display = document.querySelector('.display');
-
-let numbers = [];
-let currentOperator = '';
-let result = 0;
-let lastButton='';
 //press operator buttons and do something
 const operator = document.querySelectorAll('.operator');
-console.log(operator);
 operator.forEach((button)=>{
-    button.addEventListener('click',()=>{
-        numbers.push(parseInt(display.textContent));
-        if(numbers[1]){
-            console.table(numbers);
-            result = operate(numbers[0],currentOperator,numbers[1]);
-            display.textContent = result;
-            numbers[0] = result;
-            numbers.splice(1,1);
-            console.table(numbers);
+    button.addEventListener('click',()=>{doTheSum(button)});
+});
+        
+function doTheSum(button){
+        if(currentOperator === '='){
+            //do nothing
+        }
+        else{
+            numbers.push(parseInt(display.textContent));
+            if(button.id ==='equals'){
+                result = operate(numbers[0],currentOperator,numbers[1]);
+                display.textContent = result;
+                numbers[0] = result;
+                numbers.splice(1,1);
+            }
+            if(numbers[1]){
+                console.table(numbers);
+                result = operate(numbers[0],currentOperator,numbers[1]);
+                display.textContent = result;
+                numbers[0] = result;
+                numbers.splice(1,1);
+                console.table(numbers);
+            }
         }
         currentOperator = button.textContent;
+        console.log('current: '+currentOperator);
+        console.table(numbers);
         lastButton = 'operator';
-    });
-});
+    }
+
 
 
 
