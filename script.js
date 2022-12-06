@@ -17,7 +17,7 @@ function operate(number1, operator, number2){
         return subtract(number1,number2);
     }
     else if(operator === "/"){
-       return divide(number1,number2);
+        return divide(number1,number2);
     }
 }
 
@@ -42,20 +42,25 @@ function writeDisplay(input){
         display.textContent='';
     }
     lastButton = 'number';
-    display.textContent+=input.textContent;
+    if(display.textContent==='0'){
+        display.textContent = input.textContent;
+    }
+    else{
+        display.textContent+=input.textContent;
+    }
 }
         
 function doTheSum(button){
         if(currentOperator === '='){
-            //do nothing
+            numbers[0]=parseInt(display.textContent);
         }
+        
         else{
             numbers.push(parseInt(display.textContent));
             if(button.id ==='equals'){
                 result = operate(numbers[0],currentOperator,numbers[1]);
                 display.textContent = result;
                 numbers[0] = result;
-                numbers.splice(1,1);
             }
             if(numbers[1]){
                 console.table(numbers);
@@ -77,7 +82,7 @@ function clearCalc(){
     console.log(button);
     numbers = [];
     result = 0;
-    display.textContent='';
+    display.textContent=0;
     currentOperator='';
     lastButton ='';
 }
