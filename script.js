@@ -44,19 +44,6 @@ function writeDisplay(input){
     lastButton = 'number';
     display.textContent+=input.textContent;
 }
-
-//press number buttons and display
-const input = document.querySelectorAll('.input');
-console.log(input);
-input.forEach((button)=>{
-    button.addEventListener('click', ()=>{writeDisplay(button)});
-});
-
-//press operator buttons and do something
-const operator = document.querySelectorAll('.operator');
-operator.forEach((button)=>{
-    button.addEventListener('click',()=>{doTheSum(button)});
-});
         
 function doTheSum(button){
         if(currentOperator === '='){
@@ -83,8 +70,29 @@ function doTheSum(button){
         console.log('current: '+currentOperator);
         console.table(numbers);
         lastButton = 'operator';
-    }
+}
+
+function clearCalc(){
+    const button = document.querySelector('#clear');
+    console.log(button);
+    numbers = [];
+    result = 0;
+    display.textContent='';
+    currentOperator='';
+    lastButton ='';
+}
 
 
 
+//press number buttons and display
+const input = document.querySelectorAll('.input');
+console.log(input);
+input.forEach((button)=>{
+    button.addEventListener('click', ()=>{writeDisplay(button)});
+});
 
+//press operator buttons and do something
+const operator = document.querySelectorAll('.operator');
+operator.forEach((button)=>{
+    button.addEventListener('click',()=>{doTheSum(button)});
+});
