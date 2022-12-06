@@ -31,14 +31,47 @@ function divide(number1, number2){
 }
 
 function writeDisplay(input){
-    const display = document.querySelector('.display');
+    //const display = document.querySelector('.display');
     display.textContent+=input;
 }
 
+//press number buttons and display
 const input = document.querySelectorAll('.input');
 console.log(input);
 input.forEach((button)=>{
     button.addEventListener('click',()=>{
+        if(lastButton ==='operator'){
+        display.textContent='';
+        }
         writeDisplay(button.textContent);
+        lastButton = 'number';
     });
 });
+
+const display = document.querySelector('.display');
+
+let numbers = [];
+let currentOperator = '';
+let result = 0;
+let lastButton='';
+//press operator buttons and do something
+const operator = document.querySelectorAll('.operator');
+console.log(operator);
+operator.forEach((button)=>{
+    button.addEventListener('click',()=>{
+        numbers.push(parseInt(display.textContent));
+        if(numbers[1]){
+            console.table(numbers);
+            result = operate(numbers[0],currentOperator,numbers[1]);
+            display.textContent = result;
+            numbers[0] = result;
+            numbers.splice(1,1);
+            console.table(numbers);
+        }
+        currentOperator = button.textContent;
+        lastButton = 'operator';
+    });
+});
+
+
+
