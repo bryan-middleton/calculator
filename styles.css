@@ -54,3 +54,8 @@ body{
 .numbers button{
     margin: 2px;
 }
+
+button:active{
+    background-color: rgb(30, 227, 30);
+    color: white;
+}

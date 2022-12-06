@@ -52,11 +52,11 @@ function writeDisplay(input){
         
 function doTheSum(button){
         if(currentOperator === '='){
-            numbers[0]=parseInt(display.textContent);
+            numbers[0]=parseFloat(display.textContent);
         }
         
         else{
-            numbers.push(parseInt(display.textContent));
+            numbers.push(parseFloat(display.textContent));
             if(button.id ==='equals'){
                 result = operate(numbers[0],currentOperator,numbers[1]);
                 display.textContent = result;
@@ -87,11 +87,8 @@ function clearCalc(){
     lastButton ='';
 }
 
-
-
 //press number buttons and display
 const input = document.querySelectorAll('.input');
-console.log(input);
 input.forEach((button)=>{
     button.addEventListener('click', ()=>{writeDisplay(button)});
 });
