@@ -1,0 +1,39 @@
+*{
+    border: 1px solid red;
+}
+body{
+    box-sizing: border-box;
+}
+
+.main-container{
+    width: 50vw;
+}
+
+.display{
+    min-height: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.operators{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.operators button{
+    margin: 5px
+}
+
+.numbers{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.numbers button{
+    margin: 2px;
+}
