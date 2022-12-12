@@ -22,32 +22,45 @@ function operate(number1, operator, number2){
 }
 
 function add(number1, number2){
-    return number1 + number2;
+    return Math.round((number1 + number2)*10000000000)/10000000000;
 }
 
 function multiply(number1, number2){
-    return number1 * number2;
+    return Math.round((number1 * number2)*10000000000)/10000000000;
 }
 
 function subtract(number1, number2){
-    return number1 - number2;
+    return Math.round((number1 - number2)*10000000000)/10000000000;
 }
 
 function divide(number1, number2){
-    return number1 / number2;
+    return Math.round((number1 / number2)*10000000000)/10000000000;
 }
 
 function writeDisplay(input){
-    if(lastButton ==='operator'){
-        display.textContent='';
+    if(display.textContent.length>=16){
+        alert('Max 16 Digits');
+    }   
+        if(lastButton ==='operator'){
+            display.textContent='';
+        }
+        lastButton = 'number';
+        if(display.textContent==='0'){
+            display.textContent = input.textContent;
+        }
+        else{
+            display.textContent+=input.textContent;
+        }
     }
-    lastButton = 'number';
-    if(display.textContent==='0'){
-        display.textContent = input.textContent;
-    }
-    else{
-        display.textContent+=input.textContent;
-    }
+
+function backspace(){
+    let currentDisplay = (Array.from(display.textContent));
+    console.log(currentDisplay);
+    currentDisplay.splice(-1,1);
+    console.log(currentDisplay);
+    let newDisplay = currentDisplay.join('');
+    display.textContent = newDisplay;
+    console.log(newDisplay);
 }
         
 function doTheSum(button){
@@ -90,7 +103,8 @@ function clearCalc(){
 //press number buttons and display
 const input = document.querySelectorAll('.input');
 input.forEach((button)=>{
-    button.addEventListener('click', ()=>{writeDisplay(button)});
+    button.addEventListener('click', ()=>{
+            writeDisplay(button)});
 });
 
 //press operator buttons and do something
@@ -98,3 +112,5 @@ const operator = document.querySelectorAll('.operator');
 operator.forEach((button)=>{
     button.addEventListener('click',()=>{doTheSum(button)});
 });
+
+
